@@ -1,25 +1,37 @@
+import React, { useState, useCallback } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const funcCount = new Set();
+
+const App = () => {
+	const [count, setCount] = useState(0);
+	const [number, setNumber] = useState(0);
+
+	const incrementCounter = () => {
+		setCount(count + 1);
+	};
+	const decrementCounter = () => {
+		setCount(count - 1);
+	};
+
+	const incrementNumber = () => {
+		setNumber(number + 1);
+	};
+
+	funcCount.add(incrementCounter);
+	funcCount.add(decrementCounter);
+	funcCount.add(incrementNumber);
+	alert(funcCount.size);
+
+	return (
+		<div className="App">
+			<div>Count: {count}</div>
+			<button onClick={incrementCounter}>Increase counter</button>
+			<button onClick={decrementCounter}>Decrease counter</button>
+			<button onClick={incrementNumber}>Increase number</button>
+		</div>
+	);
+};
 
 export default App;
